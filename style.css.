@@ -1,0 +1,231 @@
+/* Variables de Color Modernas (Tema Oscuro Suave) */
+:root {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #020617;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #38bdf8;
+    --success: #22c55e;
+    --border: #334155;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navbar Responsiva */
+.navbar {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 15px 20px;
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.user-badge {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+
+/* Contenedor Adaptativo */
+.main-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* Tarjeta de Dashboard */
+.dashboard-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+/* Barra de Progreso Avanzada */
+.progress-section {
+    margin-top: 25px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#progress-percentage {
+    color: var(--success);
+}
+
+.progress-bar-container {
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #10b981, var(--success));
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+/* Sección de Tarjetas de Módulos */
+.modules-section h3 {
+    margin-bottom: 5px;
+}
+
+.section-desc {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* Grid Responsivo Inteligente */
+.modules-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Por defecto 1 columna en celulares */
+    gap: 20px;
+}
+
+/* Cambia a 2 columnas en pantallas medianas o grandes */
+@media (min-width: 768px) {
+    .modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.module-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Efecto visual cuando una tarea está completada */
+.module-card.completed {
+    border-color: var(--success);
+    opacity: 0.85;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.objetivo-text {
+    color: var(--text-muted);
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+/* Personalización del Checkbox Estilizado */
+.checkbox-container {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.checkbox-container input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    background-color: var(--bg-card);
+    margin-top: 40px;
+}

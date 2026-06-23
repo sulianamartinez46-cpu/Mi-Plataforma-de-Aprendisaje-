@@ -1,0 +1,38 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('.task-checkbox');
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercentage = document.getElementById('progress-percentage');
+
+    function actualizarProgreso() {
+        const totalTareas = checkboxes.length;
+        if (totalTareas === 0) return;
+
+        // Contar cuántas casillas están marcadas
+        const marcadas = document.querySelectorAll('.task-checkbox:checked').length;
+        
+        // Calcular porcentaje entero
+        const porcentaje = Math.round((marcadas / totalTareas) * 100);
+
+        // Actualizar la barra y el texto de manera visual
+        progressBar.style.width = `${porcentaje}%`;
+        progressPercentage.textContent = `${porcentaje}%`;
+
+        // Añadir o remover efectos de las tarjetas individualmente
+        checkboxes.forEach(checkbox => {
+            const card = document.getElementById(`card-${checkbox.dataset.id}`);
+            if (checkbox.checked) {
+                card.classList.add('completed');
+            } else {
+                card.classList.remove('completed');
+            }
+        });
+    }
+
+    // Escuchar el clic de cada checkbox
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', actualizarProgreso);
+    });
+
+    // Ejecutar una vez al cargar la página por si hay estados previos
+    actualizarProgreso();
+});

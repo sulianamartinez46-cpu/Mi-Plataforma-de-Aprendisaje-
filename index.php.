@@ -1,29 +1,4 @@
-<?php
-// Simulación de los módulos de Packet Tracer
-$modulos = [
-    [
-        "id" => 1,
-        "titulo" => "Módulo 1: Configuración Básica de Switches (CLI)",
-        "objetivo" => "Configurar el nombre del host, contraseñas de consola y habilitar el acceso Telnet/SSH en un switch 2960."
-    ],
-    [
-        "id" => 2,
-        "titulo" => "Módulo 2: Enrutamiento Estático e IP v4",
-        "objetivo" => "Configurar interfaces GigabitEthernet en los routers y establecer rutas estáticas para interconectar dos LANs."
-    ],
-    [
-        "id" => 3,
-        "titulo" => "Módulo 3: Segmentación de Red con VLANs",
-        "objetivo" => "Crear VLANs de administración, docentes y alumnos, y configurar enlaces troncales (Trunking) 802.1Q."
-    ],
-    [
-        "id" => 4,
-        "titulo" => "Módulo 4: Simulación y Modo PDU",
-        "objetivo" => "Utilizar el modo simulación de Packet Tracer para capturar tráfico ICMP y verificar el flujo de datos paso a paso."
-    ]
-];
-?>
-<!DOCTYPE html>
+<!DOCTYPE php>
 <html lang="es">
 <head>
     <meta charset="UTF-8">

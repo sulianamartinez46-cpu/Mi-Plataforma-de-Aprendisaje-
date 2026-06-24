@@ -1,64 +1,186 @@
-<!DOCTYPE php>
+<?php
+// Base de datos extendida a 9 módulos con imágenes profesionales de alta calidad
+$laboratorios = [
+    [
+        "id" => 1,
+        "fase" => "Fase 1: Fundamentos",
+        "titulo" => "Configuración Inicial del CLI y SSH Seguro",
+        "descripcion" => "Configura contraseñas encriptadas en consola/vty, mensaje del día (MOTD) y SSH v2 para deshabilitar Telnet inseguro.",
+        "comandos" => "enable secret, line vty 0 4, transport input ssh, ip domain-name",
+        "imagen" => "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop&q=80",
+        "color" => "blue"
+    ],
+    [
+        "id" => 2,
+        "fase" => "Fase 2: Conmutación",
+        "titulo" => "Segmentación de Redes Locales con VLANs",
+        "descripcion" => "Creación de IDs de VLAN, asignación de puertos de acceso y optimización del dominio de broadcast para separar departamentos.",
+        "comandos" => "vlan 10, name Ventas, switchport mode access, switchport access vlan 10",
+        "imagen" => "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&auto=format&fit=crop&q=80",
+        "color" => "purple"
+    ],
+    [
+        "id" => 3,
+        "fase" => "Fase 2: Conmutación",
+        "titulo" => "Enlaces Troncales (Trunking 802.1Q)",
+        "descripcion" => "Configuración de interfaces troncales para transportar múltiples VLANs a través de un solo cable físico entre switches.",
+        "comandos" => "switchport mode trunk, switchport trunk allowed vlan all",
+        "imagen" => "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=500&auto=format&fit=crop&q=80",
+        "color" => "purple"
+    ],
+    [
+        "id" => 4,
+        "fase" => "Fase 3: Capa 3",
+        "titulo" => "Enrutamiento Inter-VLAN (Router-on-a-Stick)",
+        "descripcion" => "Uso de un router con subinterfaces lógicas asignadas a subredes para permitir la comunicación segura entre VLANs distintas.",
+        "comandos" => "interface g0/0.10, encapsulation dot1Q 10, ip address [IP] [MASCARA]",
+        "imagen" => "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&auto=format&fit=crop&q=80",
+        "color" => "cyan"
+    ],
+    [
+        "id" => 5,
+        "fase" => "Fase 3: Capa 3",
+        "titulo" => "Direccionamiento Estático e IP v4 / IP v6",
+        "descripcion" => "Cálculo de VLSM, asignación de gateways y configuración de interfaces físicas de Layer 3 en enrutadores perimetrales.",
+        "comandos" => "ip address, ipv6 address, no shutdown, show ip interface brief",
+        "imagen" => "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&auto=format&fit=crop&q=80",
+        "color" => "cyan"
+    ],
+    [
+        "id" => 6,
+        "fase" => "Fase 4: Enrutamiento",
+        "titulo" => "Protocolo de Enrutamiento Dinámico OSPFv2",
+        "descripcion" => "Habilitación de OSPF de área única. Interconexión automática de redes, métricas por costo y tablas de convergencia rápida.",
+        "comandos" => "router ospf 1, network [NET] [WILDCARD] area 0, show ip ospf neighbor",
+        "imagen" => "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=80",
+        "color" => "orange"
+    ],
+    // NUEVOS MÓDULOS CON LAS 3 IMÁGENES EXTRA SOLICITADAS:
+    [
+        "id" => 7,
+        "fase" => "Fase 5: Seguridad",
+        "titulo" => "Listas de Control de Acceso (ACL) Extendidas",
+        "descripcion" => "Filtrado perimetral estricto de paquetes. Permite o deniega tráfico basándose en protocolos (TCP/UDP), IPs y puertos específicos.",
+        "comandos" => "access-list 101 permit tcp any host 192.168.1.10 eq 80, ip access-group 101 in",
+        "imagen" => "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=500&auto=format&fit=crop&q=80", // Imagen Extra 1
+        "color" => "red"
+    ],
+    [
+        "id" => 8,
+        "fase" => "Fase 5: Seguridad",
+        "titulo" => "Seguridad de Puertos en Switches (Port Security)",
+        "descripcion" => "Mitigación de ataques de suplantación MAC bloqueando el puerto del switch o enviando alertas si se conecta un equipo intruso.",
+        "comandos" => "switchport port-security, switchport port-security maximum 1, violation shutdown",
+        "imagen" => "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&auto=format&fit=crop&q=80", // Imagen Extra 2
+        "color" => "red"
+    ],
+    [
+        "id" => 9,
+        "fase" => "Fase 6: Servicios",
+        "titulo" => "Traducción de Direcciones de Red (NAT & PAT)",
+        "descripcion" => "Configuración de NAT sobrecargado para permitir que toda la topología de red privada local navegue hacia Internet usando una sola IP pública.",
+        "comandos" => "ip nat inside, ip nat outside, ip nat inside source list 1 interface g0/0 overload",
+        "imagen" => "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&auto=format&fit=crop&q=80", // Imagen Extra 3
+        "color" => "green"
+    ]
+];
+?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT-Academy | Plataforma de Aprendizaje</title>
+    <title>Mi Plataforma de Aprendizaje</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">🌐 PT-Academy</a>
-            <span class="user-badge">Panel del Alumno</span>
+        <div class="container nav-flex">
+            <a href="#" class="logo">⚡ Mi Plataforma de Aprendizaje</a>
+            <div class="nav-right">
+                <span class="status-badge">Estudiante: En Línea</span>
+            </div>
         </div>
     </nav>
 
-    <main class="main-container">
-        
-        <section class="dashboard-card">
-            <h2>¡Hola, Alumno! 👋</h2>
-            <p class="subtitle">Sigue tus prácticas y laboratorios de Cisco Packet Tracer entre compañeros.</p>
-            
-            <div class="progress-section">
-                <div class="progress-header">
-                    <span>Tu Avance del Curso:</span>
-                    <span id="progress-percentage">0%</span>
-                </div>
-                <div class="progress-bar-container">
-                    <div id="progress-bar" class="progress-bar"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="modules-section">
-            <h3>Laboratorios Disponibles</h3>
-            <p class="section-desc">Marca cada casilla conforme termines la topología e instrucciones en Packet Tracer:</p>
-
-            <div class="modules-grid">
-                <?php foreach ($modulos as $modulo): ?>
-                    <div class="module-card" id="card-<?php echo $modulo['id']; ?>">
-                        <div class="card-header">
-                            <label class="checkbox-container">
-                                <input type="checkbox" class="task-checkbox" data-id="<?php echo $modulo['id']; ?>">
-                                <span class="checkmark"></span>
-                            </label>
-                            <h4><?php echo $modulo['titulo']; ?></h4>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>🎯 Objetivo en Packet Tracer:</strong></p>
-                            <p class="objetivo-text"><?php echo $modulo['objetivo']; ?></p>
-                        </div>
+    <header class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>Infraestructura, Enrutamiento y Conectividad Cisco</h1>
+                <p>Bienvenido a tu panel avanzado de ingeniería. Coordina y mide tus destrezas en el diseño de arquitecturas de red y simulación en Cisco Packet Tracer de manera interactiva.</p>
+                
+                <div class="progress-wrapper">
+                    <div class="progress-meta">
+                        <span>📊 El avance del alumno:</span>
+                        <span id="progress-percentage">0% Completado</span>
                     </div>
-                <?php endforeach; ?>
+                    <div class="progress-bar-container">
+                        <div id="progress-bar" class="progress-bar-fill"></div>
+                    </div>
+                </div>
             </div>
-        </section>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&auto=format&fit=crop&q=80" alt="Ingeniería de Redes" class="img-responsive main-img">
+            </div>
+        </div>
+    </header>
 
+    <section class="container info-section">
+        <div class="info-card">
+            <h2>🎯 Material de Aprendizaje Estructurado</h2>
+            <p>Cada bloque cuenta con objetivos didácticos específicos y comandos CLI reales. Desarrolla las topologías solicitadas en tus archivos correspondientes de Packet Tracer y marca cada módulo al finalizar las pruebas de ping exitosas para registrar tu desempeño global.</p>
+        </div>
+    </section>
+
+    <main class="container main-content">
+        <h2 class="section-title">Módulos Técnicos de Laboratorio</h2>
+        
+        <div class="modules-grid">
+            <?php foreach ($laboratorios as $lab): ?>
+            <div class="card" id="card-<?php echo $lab['id']; ?>">
+                <div class="card-img-box">
+                    <img src="<?php echo $lab['imagen']; ?>" alt="<?php echo $lab['titulo']; ?>" class="img-responsive">
+                </div>
+                <div class="card-body">
+                    <span class="tag <?php echo $lab['color']; ?>"><?php echo $lab['fase']; ?></span>
+                    <h3><?php echo $lab['titulo']; ?></h3>
+                    <p><?php echo $lab['descripcion']; ?></p>
+                    
+                    <div class="learning-guide">
+                        <strong>📌 Comandos clave:</strong>
+                        <code><?php echo $lab['comandos']; ?></code>
+                    </div>
+
+                    <label class="btn-check">
+                        <input type="checkbox" class="task-checkbox">
+                        <span>Marcar como completado</span>
+                    </label>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
     </main>
 
+    <section class="stats-bg">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h3>9 Módulos</h3>
+                <p>Estructura de Redes Completa</p>
+            </div>
+            <div class="stat-item">
+                <h3>100% Responsivo</h3>
+                <p>Verificado en Celulares</p>
+            </div>
+            <div class="stat-item">
+                <h3>Cisco IOS</h3>
+                <p>Comandos de Consola Reales</p>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
-        <p>© 2026 Plataforma de Aprendizaje de Redes ·¡Prueba de despliegue exitosa! 🚀</p>
+        <p>© 2026 Mi Plataforma de Aprendizaje · Ingeniería de Sistemas y Telecomunicaciones · Formato Profesional Verificado</p>
     </footer>
 
     <script src="script.js"></script>
